@@ -1,0 +1,16 @@
+# General
+*.o
+*.a
+*.so
+*.lo
+*.la
+*.dll
+*.exe
+*.obj
+*.lib
+*.exp
+*.ilk
+*.pdb
+*.suo
+
+.vscode/
