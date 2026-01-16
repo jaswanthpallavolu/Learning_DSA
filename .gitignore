@@ -12,5 +12,5 @@
 *.ilk
 *.pdb
 *.suo
-
-.vscode/
+*.dSYM
+/bin
