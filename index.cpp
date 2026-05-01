@@ -21,11 +21,19 @@ public:
 
 vector<vector<int>> subsets(vector<int> &nums);
 vector<vector<int>> permute(vector<int> &nums);
+void letterCasePermutation(string &s, int index, vector<string> &result);
 
 int main()
 {
-    vector<int> nums = {1, 2, 3};
-    vector<vector<int>> res = permute(nums);
+    // string a = "1";
+    // cout << static_cast<char>(std::tolower(static_cast<unsigned char>(a[0])));
+    // vector<int> nums = {1, 2, 3};
+    string s = "a1b2";
+    vector<string> res;
+    string currPerm;
+    letterCasePermutation(s, 0, res);
+
+    cout << endl;
     for (auto set : res)
     {
         for (auto i : set)
@@ -36,35 +44,28 @@ int main()
     }
 }
 
-vector<vector<int>> permute(vector<int> &nums)
+void letterCasePermutation(string &s, int i, vector<string> &result)
 {
-    vector<vector<int>> perms;
-    perms.push_back({});
-    for (int i = 0; i < nums.size(); i++)
+    if (i == s.size())
     {
-        int permsLen = perms.size();
-        vector<vector<int>> newPerms;
-        for (int j = 0; j < permsLen; j++)
-        {
-            int start = 0;
-            vector<int> currPerm = perms[j];
-            int n = currPerm.size();
-            vector<int> curr;
-            for (int start = 0; start <= n; start++)
-            {
-                for (int k = 0; k < n; k++)
-                {
-                    if (start == k)
-                        curr.push_back(nums[i]);
-                    curr.push_back(currPerm[k]);
-                }
-                if (start == n)
-                    curr.push_back(nums[i]);
-                newPerms.push_back(curr);
-                curr.clear();
-            }
-        }
-        perms = newPerms;
+        result.push_back(s);
     }
-    return perms;
+    else
+    {
+
+        // for (int i = index; i < s.size(); i++)
+        // {
+        if (std::isdigit(static_cast<unsigned char>(s[i])))
+        {
+            letterCasePermutation(s, i + 1, result);
+        }
+        else
+        {
+            s[i] = static_cast<char>(std::tolower(static_cast<unsigned char>(s[i])));
+            letterCasePermutation(s, i + 1, result);
+            s[i] = static_cast<char>(std::toupper(static_cast<unsigned char>(s[i])));
+            letterCasePermutation(s, i + 1, result);
+        }
+        // }
+    }
 }

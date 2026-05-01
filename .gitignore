@@ -13,4 +13,4 @@
 *.pdb
 *.suo
 *.dSYM
-/bin
+**/bin
