@@ -1,16 +1,1 @@
-# General
-*.o
-*.a
-*.so
-*.lo
-*.la
-*.dll
-*.exe
-*.obj
-*.lib
-*.exp
-*.ilk
-*.pdb
-*.suo
-*.dSYM
-**/bin
+**/node_modules
