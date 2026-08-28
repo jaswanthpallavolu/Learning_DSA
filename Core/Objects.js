@@ -24,6 +24,8 @@ for (let key in obj) {
 // Map compares object keys by reference, not by their contents.
 
 // Array
+const array1D = new Array(10)
+const array2D = Array.from({ length: 10 }, () => new Array(10))
 
 // This pattern—collect with ...args, then later spread with ...args
 
