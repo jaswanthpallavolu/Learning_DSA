@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Leak Demo</title>
+  </head>
+  <body>
+    <h1>Memory Leak Demonstration</h1>
+    <p>Open Chrome DevTools (F12) to trace this live.</p>
+
+    <button id="leak-btn">1. Create & Leak Detached DOM Node</button>
+    <button id="fix-btn">2. Fix the Leak (Clear Reference)</button>
+
+    <div id="container">
+      <!-- The heavy list will be generated inside here -->
+      <ul id="heavy-list"></ul>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

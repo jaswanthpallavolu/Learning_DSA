@@ -10,8 +10,33 @@ const edges = [
 ]
 
 // T.C O(V + E), S.C O(V + E)
+function topologicalSortDFS(n, edges) {
+  const graph = new Map()
+  for (const [u, v] of edges) {
+    if (!graph.has(u)) graph.set(u, new Array())
+    graph.get(u).push(v)
+  }
 
-// DFS eplore all the nodes only at once
+  const visited = new Set()
+  const order = []
+
+  const DFS = (node) => {
+    visited.add(node)
+
+    for (const neighbor of graph.get(node) ?? []) {
+      if (visited.has(neighbor)) continue
+      DFS(neighbor)
+    }
+    order.push(node)
+  }
+
+  for (let node = 0; node < n; node++) {
+    if (visited.has(node)) continue
+    DFS(node)
+  }
+
+  return order.reverse()
+}
 
 // BFS - kahn's algorithm
 function topologicalSortBFS(n, edges) {
@@ -38,6 +63,9 @@ function topologicalSortBFS(n, edges) {
       if (indegree[neighbor] === 0) queue.push(neighbor)
     }
   }
+
+  if (result.length !== n) return []
+
   return result
 }
 

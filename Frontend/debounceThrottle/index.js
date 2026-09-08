@@ -27,16 +27,17 @@ function debounce(cb, delay = 1000) {
   }
 }
 
-function throttle(cb, delay = 1000) {
+function throttle(callback, delay = 1000) {
   let shouldWait = false
-  let waitingArgs = null
+  let waitArgs = null
 
   const timeoutFunc = () => {
     if (waitArgs === null) {
       shouldWait = false
     } else {
-      cb(waitArgs)
-      waitingArgs = null
+      callback(...waitArgs)
+      waitArgs = null
+      shouldWait = true
       setTimeout(timeoutFunc, delay)
     }
   }
@@ -46,7 +47,8 @@ function throttle(cb, delay = 1000) {
       waitArgs = args
       return
     }
-    cb(args)
+
+    callback(...args)
     shouldWait = true
 
     setTimeout(timeoutFunc, delay)
