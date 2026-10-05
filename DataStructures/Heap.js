@@ -1,64 +1,69 @@
 class MyHeap {
-  heap
-  constructor() {
-    this.heap = []
-  }
+  arr = []
+
   peek() {
     if (this.isEmpty()) return
-    return this.heap[0]
+    return this.arr[0]
   }
 
   push(val) {
-    this.heap.push(val)
-    this.bubbleUp(this.heap.length - 1)
+    this.arr.push(val)
+    this.bubbleUp(this.arr.length - 1)
   }
 
   pop() {
     if (this.isEmpty()) return
-    if (this.heap.length === 1) return this.heap.pop()
-    const peek = this.peek()
-    this.heap[0] = this.heap.pop()
+    if (this.size() === 1) return this.arr.pop()
+    const top = this.arr[0]
+    this.arr[0] = this.arr.pop()
     this.bubbleDown(0)
-    return peek
+    return top
   }
 
-  isEmpty() {
-    return this.heap.length === 0
-  }
-
-  bubbleUp(index) {} // TODO: implement iterative method
-
-  bubbleDown(index) {} // TODO: implement iterative method
-
-  swap(i, j) {
-    const temp = this.heap[i]
-    this.heap[i] = this.heap[j]
-    this.heap[j] = temp
-  }
-}
-
-class MinPQ extends MyHeap {
   bubbleUp(index) {
     if (index === 0) return
-
-    const root = Math.floor((index - 1) / 2)
-    if (this.heap[root][1] > this.heap[index][1]) {
-      this.swap(root, index)
-      this.bubbleUp(root)
+    const parent = Math.trunc((index - 1) / 2)
+    if (this.compare(parent, index)) {
+      this.swap(parent, index)
+      this.bubbleUp(parent)
     }
   }
 
   bubbleDown(index) {
     const left = 2 * index + 1
     const right = 2 * index + 2
-    const size = this.heap.length
     let target = index
-    if (left < size && this.heap[left][1] < this.heap[target][1]) target = left
-    if (right < size && this.heap[right][1] < this.heap[target][1])
+    if (left < this.size() && this.compare(target, left)) {
+      target = left
+    }
+    if (right < this.size() && this.compare(target, right)) {
       target = right
+    }
     if (target !== index) {
       this.swap(target, index)
       this.bubbleDown(target)
     }
+  }
+
+  compare(index1, index2) {}
+
+  swap(index1, index2) {
+    const temp = this.arr[index1]
+    this.arr[index1] = this.arr[index2]
+    this.arr[index2] = temp
+  }
+
+  isEmpty() {
+    return this.arr.length === 0
+  }
+
+  size() {
+    return this.arr.length
+  }
+}
+
+class MyMinHeap extends MyHeap {
+  compare(index1, index2) {
+    return this.arr[index1] > this.arr[index2]
   }
 }

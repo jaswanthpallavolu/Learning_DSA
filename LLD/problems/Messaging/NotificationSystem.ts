@@ -58,9 +58,7 @@ class NotificationSystem {
 
   send(user: User, notification: Notification1): void {
     for (const channel of this.channels) {
-      ;() => {
-        channel.send(user, notification)
-      }
+      channel.send(user, notification)
     }
   }
 }
@@ -72,6 +70,13 @@ const userB = new User("Jaswanth123", "jaswanth123@gmail.com", "99277843028")
 
 const notificationA = new Notification1("Pending", "order is processing")
 const notificationB = new Notification1("completed", "order has been delivered")
+
+enum Status {
+  BORROWED,
+  AVAILABLE,
+}
+
+console.log(Status.AVAILABLE)
 
 system.send(userA, notificationA)
 system.send(userB, notificationB)
